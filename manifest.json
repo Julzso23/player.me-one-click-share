@@ -1,0 +1,20 @@
+{
+	"manifest_version": 2,
+
+	"name": "One-click player.me sharing",
+	"description": "Used for posting to player.me.",
+	"version": "1.0",
+
+	"permissions": [
+		"https://player.me/*",
+		"https://private-f2fcc-playerme.apiary-proxy.com/*",
+		"tabs",
+		"cookies"
+	],
+
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_title": "Share on player.me",
+		"default_popup": "popup.html"
+	}
+}
