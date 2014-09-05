@@ -1,0 +1,28 @@
+body {
+	min-width: 320px;
+	background-color: #f6f6f6;
+}
+
+.icon {
+	padding: 16px 0 16px 0;
+}
+
+.content {
+	padding: 4px;
+}
+
+input.comment:focus {
+	border-color: #00c1c9;
+}
+
+button.share {
+	background-color: #00c1c9;
+	border-color: #00c1c9;
+	color: #fff;
+	margin-top: 6px;
+}
+button.share:hover, button.share:focus {
+	background-color: #009096;
+	border-color: #00868c;
+	color: #fff;
+}
