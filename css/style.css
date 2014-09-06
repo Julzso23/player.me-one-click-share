@@ -7,22 +7,71 @@ body {
 	padding: 16px 0 16px 0;
 }
 
-.content {
+section {
 	padding: 4px;
+	display: none;
 }
 
-input.comment:focus {
+input.form-control:focus {
 	border-color: #00c1c9;
 }
 
-button.share {
+button.btn-default {
 	background-color: #00c1c9;
 	border-color: #00c1c9;
 	color: #fff;
 	margin-top: 6px;
 }
-button.share:hover, button.share:focus {
+button.btn-default:hover, button.btn-default:focus {
 	background-color: #009096;
 	border-color: #00868c;
 	color: #fff;
+}
+
+
+/****** LOADING ******/
+#loading {
+	display: none;
+}
+
+.spinner {
+	width: 40px;
+	height: 40px;
+
+	position: relative;
+	margin: 6px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: #00c1c9;
+	opacity: 0.6;
+	position: absolute;
+	top: 0;
+	left: 0;
+	
+	-webkit-animation: bounce 2.0s infinite ease-in-out;
+	animation: bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+	-webkit-animation-delay: -1.0s;
+	animation-delay: -1.0s;
+}
+
+@-webkit-keyframes bounce {
+	0%, 100% { -webkit-transform: scale(0.0) }
+	50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bounce {
+	0%, 100% { 
+		transform: scale(0.0);
+		-webkit-transform: scale(0.0);
+	} 50% { 
+		transform: scale(1.0);
+		-webkit-transform: scale(1.0);
+	}
 }
