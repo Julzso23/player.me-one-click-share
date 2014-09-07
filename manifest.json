@@ -9,8 +9,19 @@
 		"https://player.me/*",
 		"https://private-f2fcc-playerme.apiary-proxy.com/*",
 		"tabs",
-		"cookies"
+		"cookies",
+		"contextMenus",
+		"notifications"
 	],
+
+	"icons": {
+		"16": "icon.png",
+		"128": "icon.png"
+	},
+
+	"background": {
+		"scripts": ["js/jquery-2.1.1.min.js", "js/background.js"]
+	},
 
 	"browser_action": {
 		"default_icon": "icon.png",
