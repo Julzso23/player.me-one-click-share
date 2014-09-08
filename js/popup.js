@@ -13,7 +13,7 @@ $("button#share").click(function()
 		$.ajax({
 			type: "POST",
 			url: "https://player.me/api/v1/feed",
-			data: {"post": ($("input#comment").val()!="") ? $("input#comment").val()+"[&nbsp;]("+tabs[0].url+")" : "[&nbsp;]("+tabs[0].url+")"},
+			data: {"post": ($("input#comment").val()!="") ? $("input#comment").val()+" [&nbsp;]("+tabs[0].url+")" : "[&nbsp;]("+tabs[0].url+")"},
 			dataType: "json"
 		}).done(function(data)
 		{
