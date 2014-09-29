@@ -9,7 +9,6 @@ body {
 
 section {
 	padding: 4px;
-	display: none;
 }
 
 input.form-control:focus {
@@ -27,13 +26,18 @@ button.btn-default:hover, button.btn-default:focus {
 	border-color: #00868c;
 	color: #fff;
 }
-
-
-/****** LOADING ******/
-#loading {
-	display: none;
+button.btn-default[disabled] {
+	background-color: #009096;
+	border-color: #00868c;
+	color: #fff;
 }
 
+#has-shared {
+	text-align: center;
+	margin: 2px;
+}
+
+/****** LOADING ******/
 .spinner {
 	width: 40px;
 	height: 40px;

@@ -1,7 +1,37 @@
 $(document).ready(function()
 {
-	$("#content").fadeIn(1000);
+	$("#content").hide();
+	$("#auth").hide();
 	$("#authErr").hide();
+	$("#loading").show();
+
+	$.ajax({
+		type: "GET",
+		url: "https://player.me/api/v1/users/default/activities",
+		dataType: "json"
+	}).done(function(data)
+	{
+		$("#loading").hide();
+		if(data.results.length == 0)
+		{
+			$("#auth").show();
+		}
+		else
+		{
+			$("#content").show();
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
+			{
+				$.each(data.results, function(key, value)
+				{
+					if(value.data.post.indexOf(tabs[0].url) != -1)
+					{
+						$("#share").attr("disabled", "disabled");
+						$("#share").html("<span class='glyphicon glyphicon-ok-circle'></span> You've shared this page!");
+					}
+				});
+			});
+		}
+	});
 });
 
 $("button#share").click(function()
@@ -24,8 +54,38 @@ $("button#share").click(function()
 			}
 			else
 			{
-				$("#content").fadeIn(500);
-				$("input#comment").val("");
+				$.ajax({
+					type: "GET",
+					url: "https://player.me/api/v1/users/default/activities",
+					dataType: "json"
+				}).done(function(data)
+				{
+					$("#loading").hide();
+					if(data.results.length == 0)
+					{
+						$("#auth").show();
+					}
+					else
+					{
+						$("#content").show();
+						chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
+						{
+							$.each(data.results, function(key, value)
+							{
+								if(value.data.post.indexOf(tabs[0].url) != -1)
+								{
+									$("#share").attr("disabled", "disabled");
+									$("#share").html("<span class='glyphicon glyphicon-ok-circle'></span> You've shared this page!");
+								}
+							});
+							if(!$("#shared").is(":visible"))
+							{
+								$("#content").fadeIn(500);
+								$("input#comment").val("");
+							}
+						});
+					}
+				});
 			}
 		});
 	});
