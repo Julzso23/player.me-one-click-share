@@ -27,9 +27,9 @@ button.btn-default:hover, button.btn-default:focus {
 	color: #fff;
 }
 button.btn-default[disabled] {
-	background-color: #009096;
-	border-color: #00868c;
-	color: #fff;
+	background-color: #009096 !important;
+	border-color: #00868c !important;
+	color: #fff !important;
 }
 
 #has-shared {

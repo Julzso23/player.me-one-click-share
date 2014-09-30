@@ -14,11 +14,11 @@ $(document).ready(function()
 		$("#loading").hide();
 		if(data.results.length == 0)
 		{
-			$("#auth").show();
+			$("#auth").fadeIn(500);
 		}
 		else
 		{
-			$("#content").show();
+			$("#content").fadeIn(500);
 			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
 			{
 				$.each(data.results, function(key, value)
@@ -47,9 +47,9 @@ $("button#share").click(function()
 			dataType: "json"
 		}).done(function(data)
 		{
-			$("#loading").hide();
 			if(data.results == "Must be logged on to do this")
 			{
+				$("#loading").hide();
 				$("#auth").fadeIn(500);
 			}
 			else
@@ -63,11 +63,11 @@ $("button#share").click(function()
 					$("#loading").hide();
 					if(data.results.length == 0)
 					{
-						$("#auth").show();
+						$("#auth").fadeIn(500);
 					}
 					else
 					{
-						$("#content").show();
+						$("#content").fadeIn(500);
 						chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
 						{
 							$.each(data.results, function(key, value)
@@ -78,11 +78,6 @@ $("button#share").click(function()
 									$("#share").html("<span class='glyphicon glyphicon-ok-circle'></span> You've shared this page!");
 								}
 							});
-							if(!$("#shared").is(":visible"))
-							{
-								$("#content").fadeIn(500);
-								$("input#comment").val("");
-							}
 						});
 					}
 				});
