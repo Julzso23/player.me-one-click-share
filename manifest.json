@@ -3,7 +3,7 @@
 
 	"name": "One-click player.me sharing",
 	"description": "Used for posting to player.me.",
-	"version": "1.2.0",
+	"version": "1.2.1",
 
 	"permissions": [
 		"https://player.me/*",
