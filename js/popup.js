@@ -45,7 +45,7 @@ $("button#share").click(function()
 		$.ajax({
 			type: "POST",
 			url: URL + "/api/v1/feed",
-			data: {"post": ($("input#comment").val()!="") ? $("input#comment").val()+" [&nbsp;]("+tabs[0].url+")" : tabs[0].url},
+			data: {"post": ($("input#comment").val()!="") ? $("input#comment").val()+" [&nbsp;]("+tabs[0].url+")" : "["+tabs[0].title+"]("+tabs[0].url+")"},
 			dataType: "json"
 		}).done(function(data)
 		{
