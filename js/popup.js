@@ -43,7 +43,7 @@ $("button#share").click(function()
 		$.ajax({
 			type: "POST",
 			url: "https://player.me/api/v1/feed",
-			data: {"post": ($("input#comment").val()!="") ? $("input#comment").val()+" [&nbsp;]("+tabs[0].url+")" : "[&nbsp;]("+tabs[0].url+")"},
+			data: {"post": ($("input#comment").val()!="") ? $("input#comment").val()+" [&nbsp;]("+tabs[0].url+")" : tabs[0].url},
 			dataType: "json"
 		}).done(function(data)
 		{
@@ -74,6 +74,7 @@ $("button#share").click(function()
 							{
 								if(value.data.post.indexOf(tabs[0].url) != -1)
 								{
+									$("input#comment").val("");
 									$("#share").attr("disabled", "disabled");
 									$("#share").html("<span class='glyphicon glyphicon-ok-circle'></span> You've shared this page!");
 								}
