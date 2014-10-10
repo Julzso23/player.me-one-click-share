@@ -1,3 +1,5 @@
+URL = 'https://player.me';
+
 $(document).ready(function()
 {
 	$("#content").hide();
@@ -7,7 +9,7 @@ $(document).ready(function()
 
 	$.ajax({
 		type: "GET",
-		url: "https://player.me/api/v1/users/default/activities",
+		url: URL + "/api/v1/users/default/activities",
 		dataType: "json"
 	}).done(function(data)
 	{
@@ -42,7 +44,7 @@ $("button#share").click(function()
 	{
 		$.ajax({
 			type: "POST",
-			url: "https://player.me/api/v1/feed",
+			url: URL + "/api/v1/feed",
 			data: {"post": ($("input#comment").val()!="") ? $("input#comment").val()+" [&nbsp;]("+tabs[0].url+")" : tabs[0].url},
 			dataType: "json"
 		}).done(function(data)
@@ -56,7 +58,7 @@ $("button#share").click(function()
 			{
 				$.ajax({
 					type: "GET",
-					url: "https://player.me/api/v1/users/default/activities",
+					url: URL + "/api/v1/users/default/activities",
 					dataType: "json"
 				}).done(function(data)
 				{
@@ -100,7 +102,7 @@ $("button#login").click(function()
 		$("#loading").fadeIn(500);
 		$.ajax({
 			type: "POST",
-			url: "https://player.me/api/v1/auth/login",
+			url: URL + "/api/v1/auth/login",
 			data: {"login": $("input#user").val(), "password": $("input#password").val(), "remember": true},
 			dataType: "json"
 		}).done(function(data)
