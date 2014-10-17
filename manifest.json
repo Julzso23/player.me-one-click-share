@@ -7,7 +7,6 @@
 
 	"permissions": [
 		"https://player.me/*",
-		"https://private-f2fcc-playerme.apiary-proxy.com/*",
 		"tabs",
 		"cookies",
 		"contextMenus",
