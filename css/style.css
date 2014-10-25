@@ -60,6 +60,14 @@ article.post {
 article.post .meta {
 	background-color: #ebebf2;
 	border-radius: 4px;
+	padding: 5px;
+}
+article.post .meta img {
+	max-width: 128px;
+	float: left;
+}
+article.post .meta .title {
+	padding-left: 134px;
 }
 
 /****** LOADING ******/

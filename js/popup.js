@@ -1,6 +1,22 @@
 URL = 'https://player.me';
 postHistory = [];
 
+function displayHistory()
+{
+	$.each(postHistory, function(key, value)
+	{
+		$("section#history").append("<article class='post'>" +
+				value.data.post +
+				((value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?
+				"<div class='meta'>" +
+					"<a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'><img src='http:"+value.data.metas[0].thumbnail+"'></a>" +
+					((value.data.metas[0].title != null)?"<div class='title'><a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'>"+value.data.metas[0].title+"</a></div>":"") +
+					"<div class='clearfix'></div>" +
+				"</div>":"") +
+			"</article>");
+	});
+}
+
 $(document).ready(function()
 {
 	$("#content").hide();
@@ -24,14 +40,7 @@ $(document).ready(function()
 		else
 		{
 			postHistory = data.results;
-			$.each(postHistory, function(key, value)
-			{
-				$("section#history").append("<article class='post'>" +
-						value.data.post +
-						((value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?"<div class='meta'><a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'>"+((value.data.metas[0].title != null)?value.data.metas[0].title:value.data.metas[0].url)+"</a></div>":"") +
-					"</article>");
-			});
-
+			displayHistory();
 			$("#navigation").fadeIn(500);
 			$("#content").fadeIn(500);
 			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
@@ -85,14 +94,7 @@ $("button#share").click(function()
 					{
 						postHistory = data.results;
 						$("section#history").html("");
-						$.each(postHistory, function(key, value)
-						{
-							$("section#history").append("<article class='post'>" +
-									value.data.post +
-									((value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?"<div class='meta'><a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'>"+((value.data.metas[0].title != null)?value.data.metas[0].title:value.data.metas[0].url)+"</a></div>":"") +
-								"</article>");
-						});
-
+						displayHistory();
 						$("#navigation").fadeIn(500);
 						$("#content").fadeIn(500);
 						chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
