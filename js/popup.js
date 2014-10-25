@@ -1,10 +1,13 @@
 URL = 'https://player.me';
+postHistory = [];
 
 $(document).ready(function()
 {
 	$("#content").hide();
+	$("#history").hide();
 	$("#auth").hide();
 	$("#authErr").hide();
+	$("#navigation").hide();
 	$("#loading").show();
 
 	$.ajax({
@@ -20,6 +23,16 @@ $(document).ready(function()
 		}
 		else
 		{
+			postHistory = data.results;
+			$.each(postHistory, function(key, value)
+			{
+				$("section#history").append("<article class='post'>" +
+						value.data.post +
+						((value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?"<div class='meta'><a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'>"+((value.data.metas[0].title != null)?value.data.metas[0].title:value.data.metas[0].url)+"</a></div>":"") +
+					"</article>");
+			});
+
+			$("#navigation").fadeIn(500);
 			$("#content").fadeIn(500);
 			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
 			{
@@ -39,6 +52,7 @@ $(document).ready(function()
 $("button#share").click(function()
 {
 	$("#content").hide();
+	$("#navigation").hide();
 	$("#loading").fadeIn(500);
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
 	{
@@ -69,6 +83,17 @@ $("button#share").click(function()
 					}
 					else
 					{
+						postHistory = data.results;
+						$("section#history").html("");
+						$.each(postHistory, function(key, value)
+						{
+							$("section#history").append("<article class='post'>" +
+									value.data.post +
+									((value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?"<div class='meta'><a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'>"+((value.data.metas[0].title != null)?value.data.metas[0].title:value.data.metas[0].url)+"</a></div>":"") +
+								"</article>");
+						});
+
+						$("#navigation").fadeIn(500);
 						$("#content").fadeIn(500);
 						chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
 						{
@@ -115,9 +140,24 @@ $("button#login").click(function()
 			}
 			else
 			{
-
+				$("#navigation").fadeIn(500);
 				$("#content").fadeIn(500);
 			}
 		});
 	}
+});
+
+$("button#showPost").click(function()
+{
+	$("#history").hide();
+	$("#content").fadeIn(500);
+	$("button#showHistory").removeClass("selected");
+	$("button#showPost").addClass("selected");
+});
+$("button#showHistory").click(function()
+{
+	$("#content").hide();
+	$("#history").fadeIn(500);
+	$("button#showPost").removeClass("selected");
+	$("button#showHistory").addClass("selected");
 });

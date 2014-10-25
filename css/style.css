@@ -1,6 +1,11 @@
 body {
-	min-width: 320px;
+	min-width: 360px;
 	background-color: #f6f6f6;
+}
+
+a {
+	color: #00C1C9;
+	text-decoration: none;
 }
 
 .icon {
@@ -32,9 +37,29 @@ button.btn-default[disabled] {
 	color: #fff !important;
 }
 
-#has-shared {
-	text-align: center;
-	margin: 2px;
+#navigation button {
+	border-radius: 0;
+	padding: 0;
+	background-color: transparent;
+	outline: none !important;
+}
+#navigation button:hover {
+	background-color: rgba(38,42,53,0.1);
+}
+#navigation button.selected {
+	border-bottom: 3px solid #FF005C;
+}
+
+article.post {
+	border-left: 3px solid #00C1C9;
+	border-radius: 4px;
+	background-color: #fff;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+article.post .meta {
+	background-color: #ebebf2;
+	border-radius: 4px;
 }
 
 /****** LOADING ******/
