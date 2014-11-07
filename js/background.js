@@ -7,7 +7,7 @@ chrome.contextMenus.create(
 			$.ajax({
 				type: "POST",
 				url: "https://player.me/api/v1/feed",
-				data: {"post": "["+tab.title+"]("+tabsurl+")"},
+				data: {"post": "["+tab.title+"]("+tab.url+")"},
 				dataType: "json"
 			}).done(function(data)
 			{

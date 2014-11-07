@@ -29,7 +29,7 @@ $(document).ready(function()
 	$.ajax({
 		type: "GET",
 		url: URL + "/api/v1/users/default/activities",
-		data: {type: "playerme"},
+		data: {source: "playerme"},
 		dataType: "json"
 	}).done(function(data)
 	{
@@ -83,7 +83,7 @@ $("button#share").click(function()
 				$.ajax({
 					type: "GET",
 					url: URL + "/api/v1/users/default/activities",
-					data: {type: "playerme"},
+					data: {source: "playerme"},
 					dataType: "json"
 				}).done(function(data)
 				{
