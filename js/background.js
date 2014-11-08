@@ -27,7 +27,7 @@ var socket = eio("wss://player.me/engineio?EIO=2&transport=websocket");
 socket.on("open", function()
 {
 	socket.on("message", function(data){
-		data = $.parseJSON(data)
+		data = $.parseJSON(data);
 		if(data.command == "notify")
 		{
 			notifications = 0;
@@ -38,7 +38,12 @@ socket.on("open", function()
 					notifications = notifications + 1;
 				}
 			});
-			chrome.browserAction.setBadgeText({text: notifications.toString()});
+			chrome.browserAction.setBadgeText({text: ((notifications==0)?"":notifications.toString())});
+		}
+		if(data.command == "mark_all_read")
+		{
+			notifications = 0;
+			chrome.browserAction.setBadgeText({text: ""});
 		}
 	});
 	socket.on("close", function(){});
