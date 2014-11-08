@@ -1,5 +1,5 @@
 body {
-	min-width: 360px;
+	width: 360px;
 	background-color: #f6f6f6;
 }
 
@@ -68,6 +68,10 @@ article.post .meta img {
 }
 article.post .meta .title {
 	padding-left: 134px;
+}
+
+#history div.posts {
+	margin-top: 10px;
 }
 
 /****** LOADING ******/

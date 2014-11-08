@@ -3,9 +3,10 @@ postHistory = [];
 
 function displayHistory()
 {
+	$("section#history div.posts").html("");
 	$.each(postHistory, function(key, value)
 	{
-		$("section#history").append("<article class='post'>" +
+		$("section#history div.posts").append("<article class='post'>" +
 				value.data.post +
 				((value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?
 				"<div class='meta'>" +
@@ -29,7 +30,7 @@ $(document).ready(function()
 	$.ajax({
 		type: "GET",
 		url: URL + "/api/v1/users/default/activities",
-		data: {source: "playerme"},
+		data: {sources: "playerme"},
 		dataType: "json"
 	}).done(function(data)
 	{
@@ -83,7 +84,7 @@ $("button#share").click(function()
 				$.ajax({
 					type: "GET",
 					url: URL + "/api/v1/users/default/activities",
-					data: {source: "playerme"},
+					data: {sources: "playerme"},
 					dataType: "json"
 				}).done(function(data)
 				{
@@ -164,4 +165,45 @@ $("button#showHistory").click(function()
 	$("#history").fadeIn(500);
 	$("button#showPost").removeClass("selected");
 	$("button#showHistory").addClass("selected");
+});
+
+$("button#refreshHistory").click(function()
+{
+	$("#content").hide();
+	$("#history").hide();
+	$("#auth").hide();
+	$("#authErr").hide();
+	$("#navigation").hide();
+	$("#loading").show();
+	$.ajax({
+		type: "GET",
+		url: URL + "/api/v1/users/default/activities",
+		data: {sources: "playerme"},
+		dataType: "json"
+	}).done(function(data)
+	{
+		$("#loading").hide();
+		if(data.results.length == 0)
+		{
+			$("#auth").fadeIn(500);
+		}
+		else
+		{
+			postHistory = data.results;
+			displayHistory();
+			$("#navigation").fadeIn(500);
+			$("#history").fadeIn(500);
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
+			{
+				$.each(data.results, function(key, value)
+				{
+					if(value.data.post.indexOf(tabs[0].url) != -1)
+					{
+						$("#share").attr("disabled", "disabled");
+						$("#share").html("<span class='glyphicon glyphicon-ok-circle'></span> You've shared this page!");
+					}
+				});
+			});
+		}
+	});
 });
