@@ -20,3 +20,26 @@ chrome.contextMenus.create(
 		}
 	}
 );
+
+var notifications = 0;
+
+var socket = eio("wss://player.me/engineio?EIO=2&transport=websocket");
+socket.on("open", function()
+{
+	socket.on("message", function(data){
+		data = $.parseJSON(data)
+		if(data.command == "notify")
+		{
+			notifications = 0;
+			$.each(data.data.notifications, function(key, value)
+			{
+				if(value.unread)
+				{
+					notifications = notifications + 1;
+				}
+			});
+			chrome.browserAction.setBadgeText({text: notifications.toString()});
+		}
+	});
+	socket.on("close", function(){});
+});

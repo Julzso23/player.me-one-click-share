@@ -19,7 +19,7 @@
 	},
 
 	"background": {
-		"scripts": ["js/jquery-2.1.1.min.js", "js/background.js"]
+		"scripts": ["js/engine.io.js", "js/jquery-2.1.1.min.js", "js/background.js"]
 	},
 
 	"browser_action": {
