@@ -8,7 +8,7 @@ function displayHistory()
 	{
 		$("section#history div.posts").append("<article class='post'>" +
 				value.data.post +
-				((value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?
+				((value.data.metas != null)&&(value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?
 				"<div class='meta'>" +
 					"<a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'><img src='http:"+value.data.metas[0].thumbnail+"'></a>" +
 					((value.data.metas[0].title != null)?"<div class='title'><a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'>"+value.data.metas[0].title+"</a></div>":"") +
