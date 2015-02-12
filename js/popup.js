@@ -51,7 +51,7 @@ $(document).ready(function()
 	});
 });
 
-function sharePage()
+$("#share").click(function()
 {
 	setPage("loading");
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
@@ -98,9 +98,9 @@ function sharePage()
 			}
 		});
 	});
-}
+});
 
-function login()
+$("#login").click(function()
 {
 	if($("input#user").val()=="" || $("input#password").val()=="")
 	{
@@ -127,4 +127,4 @@ function login()
 			}
 		});
 	}
-};
+});
