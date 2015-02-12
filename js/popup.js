@@ -1,31 +1,25 @@
 URL = 'https://player.me';
 postHistory = [];
 
-function displayHistory()
+function setPage(page)
 {
-	$("section#history div.posts").html("");
-	$.each(postHistory, function(key, value)
+	$("section.page").hide();
+	$("#authErr").hide();
+	if (page == "loading")
 	{
-		$("section#history div.posts").append("<article class='post'>" +
-				value.data.post +
-				((value.data.metas != null)&&(value.data.metas.length == 1)&&(value.data.metas[0].url != "undefined")?
-				"<div class='meta'>" +
-					"<a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'><img src='http:"+value.data.metas[0].thumbnail+"'></a>" +
-					((value.data.metas[0].title != null)?"<div class='title'><a href='"+value.data.metas[0].url+"' rel='nofollow' target='_blank'>"+value.data.metas[0].title+"</a></div>":"") +
-					"<div class='clearfix'></div>" +
-				"</div>":"") +
-			"</article>");
-	});
+		$("#loading").fadeIn(250);
+	}
+	else
+	{
+		$("#loading").hide();
+		$("section#" + page).fadeIn(250);
+	}
 }
 
 $(document).ready(function()
 {
-	$("#content").hide();
-	$("#history").hide();
-	$("#auth").hide();
-	$("#authErr").hide();
-	$("#navigation").hide();
-	$("#loading").show();
+	$("section.page").hide();
+	setPage("loading");
 
 	$.ajax({
 		type: "GET",
@@ -34,17 +28,14 @@ $(document).ready(function()
 		dataType: "json"
 	}).done(function(data)
 	{
-		$("#loading").hide();
 		if(data.results.length == 0)
 		{
-			$("#auth").fadeIn(500);
+			setPage("auth");
 		}
 		else
 		{
 			postHistory = data.results;
-			displayHistory();
-			$("#navigation").fadeIn(500);
-			$("#content").fadeIn(500);
+			setPage("content");
 			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
 			{
 				$.each(data.results, function(key, value)
@@ -60,11 +51,9 @@ $(document).ready(function()
 	});
 });
 
-$("button#share").click(function()
+function sharePage()
 {
-	$("#content").hide();
-	$("#navigation").hide();
-	$("#loading").fadeIn(500);
+	setPage("loading");
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
 	{
 		$.ajax({
@@ -76,8 +65,7 @@ $("button#share").click(function()
 		{
 			if(data.results == "Must be logged on to do this")
 			{
-				$("#loading").hide();
-				$("#auth").fadeIn(500);
+				setPage("auth");
 			}
 			else
 			{
@@ -88,38 +76,31 @@ $("button#share").click(function()
 					dataType: "json"
 				}).done(function(data)
 				{
-					$("#loading").hide();
 					if(data.results.length == 0)
 					{
-						$("#auth").fadeIn(500);
+						setPage("auth");
 					}
 					else
 					{
 						postHistory = data.results;
-						$("section#history").html("");
-						displayHistory();
-						$("#navigation").fadeIn(500);
-						$("#content").fadeIn(500);
-						chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
+						setPage("content");
+						$.each(data.results, function(key, value)
 						{
-							$.each(data.results, function(key, value)
+							if(value.data.post.indexOf(tabs[0].url) != -1)
 							{
-								if(value.data.post.indexOf(tabs[0].url) != -1)
-								{
-									$("input#comment").val("");
-									$("#share").attr("disabled", "disabled");
-									$("#share").html("<span class='glyphicon glyphicon-ok-circle'></span> You've shared this page!");
-								}
-							});
+								$("input#comment").val("");
+								$("#share").attr("disabled", "disabled");
+								$("#share").html("<span class='glyphicon glyphicon-ok-circle'></span> You've shared this page!");
+							}
 						});
 					}
 				});
 			}
 		});
 	});
-});
+}
 
-$("button#login").click(function()
+function login()
 {
 	if($("input#user").val()=="" || $("input#password").val()=="")
 	{
@@ -127,9 +108,7 @@ $("button#login").click(function()
 	}
 	else
 	{
-		$("#authErr").hide();
-		$("#auth").hide();
-		$("#loading").fadeIn(500);
+		setPage("loading");
 		$.ajax({
 			type: "POST",
 			url: URL + "/api/v1/auth/login",
@@ -137,73 +116,15 @@ $("button#login").click(function()
 			dataType: "json"
 		}).done(function(data)
 		{
-			$("#loading").hide();
 			if(data.results[0] == "Wrong username/password")
 			{
-				$("#auth").fadeIn(500);
+				setPage("auth");
 				$("#authErr").fadeIn(600);
 			}
 			else
 			{
-				$("#navigation").fadeIn(500);
-				$("#content").fadeIn(500);
+				setPage("content");
 			}
 		});
 	}
-});
-
-$("button#showPost").click(function()
-{
-	$("#history").hide();
-	$("#content").fadeIn(500);
-	$("button#showHistory").removeClass("selected");
-	$("button#showPost").addClass("selected");
-});
-$("button#showHistory").click(function()
-{
-	$("#content").hide();
-	$("#history").fadeIn(500);
-	$("button#showPost").removeClass("selected");
-	$("button#showHistory").addClass("selected");
-});
-
-$("button#refreshHistory").click(function()
-{
-	$("#content").hide();
-	$("#history").hide();
-	$("#auth").hide();
-	$("#authErr").hide();
-	$("#navigation").hide();
-	$("#loading").show();
-	$.ajax({
-		type: "GET",
-		url: URL + "/api/v1/users/default/activities",
-		data: {sources: "playerme"},
-		dataType: "json"
-	}).done(function(data)
-	{
-		$("#loading").hide();
-		if(data.results.length == 0)
-		{
-			$("#auth").fadeIn(500);
-		}
-		else
-		{
-			postHistory = data.results;
-			displayHistory();
-			$("#navigation").fadeIn(500);
-			$("#history").fadeIn(500);
-			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
-			{
-				$.each(data.results, function(key, value)
-				{
-					if(value.data.post.indexOf(tabs[0].url) != -1)
-					{
-						$("#share").attr("disabled", "disabled");
-						$("#share").html("<span class='glyphicon glyphicon-ok-circle'></span> You've shared this page!");
-					}
-				});
-			});
-		}
-	});
-});
+};
