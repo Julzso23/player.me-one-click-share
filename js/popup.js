@@ -1,5 +1,4 @@
 URL = 'https://player.me';
-postHistory = [];
 
 function setPage(page)
 {
@@ -34,7 +33,6 @@ $(document).ready(function()
 		}
 		else
 		{
-			postHistory = data.results;
 			setPage("content");
 			chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
 			{
@@ -82,7 +80,6 @@ $("#share").click(function()
 					}
 					else
 					{
-						postHistory = data.results;
 						setPage("content");
 						$.each(data.results, function(key, value)
 						{
