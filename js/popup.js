@@ -27,7 +27,7 @@ $(document).ready(function()
 		dataType: "json"
 	}).done(function(data)
 	{
-		if(data.results.length == 0)
+		if(data.success == false)
 		{
 			setPage("auth");
 		}
@@ -74,7 +74,7 @@ $("#share").click(function()
 					dataType: "json"
 				}).done(function(data)
 				{
-					if(data.results.length == 0)
+					if(data.success == false)
 					{
 						setPage("auth");
 					}
