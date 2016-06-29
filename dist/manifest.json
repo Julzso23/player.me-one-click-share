@@ -2,15 +2,13 @@
 	"manifest_version": 2,
 
 	"name": "One-click player.me sharing",
-	"description": "Used for posting to player.me.",
-	"version": "2.1.0",
+	"description": "Allows you to share a link to the current page to player.me",
+	"version": "3.0.0",
 
 	"permissions": [
 		"https://player.me/*",
 		"tabs",
-		"cookies",
-		"contextMenus",
-		"notifications"
+		"cookies"
 	],
 
 	"icons": {
