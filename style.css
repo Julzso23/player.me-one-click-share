@@ -1,0 +1,29 @@
+body {
+    width: 360px;
+    background: #2B303B;
+    padding: 0;
+    margin: 0;
+}
+
+.post {
+    padding: 10px;
+}
+
+.post > textarea {
+    height: 52px;
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+    background: #242832;
+    border: 1px solid #333A46;
+    padding: 7px 44px 7px 10px;
+    color: #919baf;
+}
+.post > textarea:focus {
+    outline: none;
+}
+
+.post > button {
+    width: 100%;
+    margin-top: 10px;
+}
