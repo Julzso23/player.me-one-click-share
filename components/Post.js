@@ -1,6 +1,7 @@
 import React from 'react';
 import request from 'superagent';
 import Spinner from './Spinner';
+import {browserHistory} from 'react-router';
 import '../styles/form.css';
 
 export default class Post extends React.Component {
@@ -45,6 +46,8 @@ export default class Post extends React.Component {
                 this.setState({loading: false});
                 if (!err) {
                     this.setState({text: ''});
+                } else if (err.status === 403) {
+                    browserHistory.push('login');
                 }
             });
     }
