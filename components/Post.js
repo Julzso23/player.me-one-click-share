@@ -9,41 +9,42 @@ export default class Post extends React.Component {
 
         this.state={
             maxLength: 0,
-            loading: false
+            loading: false,
+            url: '',
+            title: '',
+            text: ''
         };
-        this.url = '';
-        this.title = '';
     }
 
     componentDidMount() {
-        this.setLoading(true);
+        this.setState({loading: true});
         chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-            this.setLoading(false);
-            this.setState({maxLength: 4000 - tabs[0].url.length - 12});
-            this.url = tabs[0].url;
-            this.title = tabs[0].title;
+            this.setState({
+                loading: false,
+                maxLength: 4000 - tabs[0].url.length - 12,
+                url: tabs[0].url,
+                title: tabs[0].title
+            });
         });
     }
 
-    setLoading(value) {
-        this.setState({loading: value});
-        this.textArea.disabled = value;
-        this.button.disabled = value;
+    handleChange(event) {
+        this.setState({text: event.target.value});
     }
 
     post() {
-        let value = `[${this.title}](${this.url})`;
-        if (this.textArea.value !== '') value = this.textArea.value + ` [&nbsp;](${this.url})`;
-        this.setLoading(true);
+        let value = `[${this.state.title}](${this.state.url})`;
+        if (this.state.text !== '') value = this.state.text + ` [&nbsp;](${this.state.url})`;
+        this.setState({loading: true});
         request
             .post('https://player.me/api/v1/feed')
             .send({
                 post: value
             })
             .end((err, res) => {
-                this.setLoading(false);
+                this.setState({loading: false});
                 if (!err) {
-                    this.textArea.value = '';
+                    this.setState({text: ''});
                 }
             });
     }
@@ -51,9 +52,15 @@ export default class Post extends React.Component {
     render() {
         return (
             <div className='post'>
-                <textarea ref={component => this.textArea = component} maxLength={this.state.maxLength} placeholder='Say something about this page'></textarea>
+                <textarea disabled={this.state.loading}
+                          maxLength={this.state.maxLength}
+                          value={this.state.text}
+                          onChange={this.handleChange.bind(this)}
+                          placeholder='Say something about this page'>
+                </textarea>
+
                 {this.state.loading ? <Spinner /> : null}
-                <button ref={component => this.button = component} onClick={this.post.bind(this)}>Share this page</button>
+                <button disabled={this.state.loading} onClick={this.post.bind(this)}>Share this page</button>
             </div>
         );
     }
