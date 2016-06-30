@@ -26,7 +26,7 @@ export default class Login extends React.Component {
                 login: this.state.name,
                 password: this.state.password
             })
-            .end((err, req) => {
+            .end((err, res) => {
                 this.setState({loading: false});
                 this.setState({password: ''});
             });
