@@ -20,6 +20,10 @@
     opacity: 0.5;
 }
 
+.form > input {
+    height: auto;
+}
+
 .form > .spinner {
     float: left;
 }
