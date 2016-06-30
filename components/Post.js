@@ -1,7 +1,7 @@
 import React from 'react';
 import request from 'superagent';
 import Spinner from './Spinner';
-import '../styles/post.css';
+import '../styles/form.css';
 
 export default class Post extends React.Component {
     constructor(props) {
@@ -51,7 +51,7 @@ export default class Post extends React.Component {
 
     render() {
         return (
-            <div className='post'>
+            <div className='form'>
                 <textarea disabled={this.state.loading}
                           maxLength={this.state.maxLength}
                           value={this.state.text}

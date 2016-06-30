@@ -1,9 +1,9 @@
-.post {
+.form {
     padding: 10px;
     overflow: hidden;
 }
 
-.post > textarea {
+.form > textarea, .form > input {
     height: 52px;
     box-sizing: border-box;
     width: 100%;
@@ -13,18 +13,18 @@
     padding: 7px 44px 7px 10px;
     color: #919baf;
 }
-.post > textarea:focus {
+.form > textarea:focus, .form > input:focus {
     outline: none;
 }
-.post > textarea[disabled] {
+.form > textarea[disabled], .form > input[disabled] {
     opacity: 0.5;
 }
 
-.post > .spinner {
+.form > .spinner {
     float: left;
 }
 
-.post > button {
+.form > button {
     margin-top: 10px;
     background: #60869F;
     border: 1px solid #60869F;
@@ -36,19 +36,19 @@
     float: right;
     cursor: pointer;
 }
-.post > button:hover {
+.form > button:hover {
     background: #448BBA;
     border-color: #448BBA;
 }
-.post > button:active {
+.form > button:active {
     color: #d7e1e7;
     background: #1F5578;
     border-color: #1F5578;
 }
-.post > button:focus {
+.form > button:focus {
     outline: none;
 }
-.post > button[disabled] {
+.form > button[disabled] {
     background: #60869F;
     border-color: #60869F;
     opacity: 0.5;
