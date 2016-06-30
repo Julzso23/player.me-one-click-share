@@ -17,6 +17,10 @@
     outline: none;
 }
 
+.post > .spinner {
+    float: left;
+}
+
 .post > button {
     margin-top: 10px;
     background: #60869F;
