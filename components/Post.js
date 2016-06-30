@@ -7,7 +7,7 @@ export default class Post extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state={
+        this.state = {
             maxLength: 0,
             loading: false,
             url: '',
