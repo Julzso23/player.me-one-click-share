@@ -16,6 +16,9 @@
 .post > textarea:focus {
     outline: none;
 }
+.post > textarea[disabled] {
+    opacity: 0.5;
+}
 
 .post > .spinner {
     float: left;
@@ -44,4 +47,10 @@
 }
 .post > button:focus {
     outline: none;
+}
+.post > button[disabled] {
+    background: #60869F;
+    border-color: #60869F;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
