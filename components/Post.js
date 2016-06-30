@@ -1,5 +1,6 @@
 import React from 'react';
 import request from 'superagent';
+import '../styles/post.css';
 
 export default class Post extends React.Component {
     constructor(props) {
