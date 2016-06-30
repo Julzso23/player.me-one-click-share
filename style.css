@@ -1,5 +1,5 @@
 body {
-    width: 360px;
+    width: 480px;
     background: #2B303B;
     padding: 0;
     margin: 0;
@@ -7,6 +7,7 @@ body {
 
 .post {
     padding: 10px;
+    overflow: hidden;
 }
 
 .post > textarea {
@@ -24,6 +25,26 @@ body {
 }
 
 .post > button {
-    width: 100%;
     margin-top: 10px;
+    background: #60869F;
+    border: 1px solid #60869F;
+    border-radius: 4px;
+    color: #FFF;
+    font-size: 14px;
+    line-height: 1.42857;
+    padding: 5px 12px;
+    float: right;
+    cursor: pointer;
+}
+.post > button:hover {
+    background: #448BBA;
+    border-color: #448BBA;
+}
+.post > button:active {
+    color: #d7e1e7;
+    background: #1F5578;
+    border-color: #1F5578;
+}
+.post > button:focus {
+    outline: none;
 }
