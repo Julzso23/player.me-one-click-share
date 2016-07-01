@@ -1,10 +1,11 @@
 import React from 'react';
 import request from 'superagent';
 import Spinner from './Spinner';
-import {browserHistory} from 'react-router';
+import Error from './Error';
+import {withRouter} from 'react-router';
 import '../styles/form.css';
 
-export default class Post extends React.Component {
+class Post extends React.Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +14,8 @@ export default class Post extends React.Component {
             loading: false,
             url: '',
             title: '',
-            text: ''
+            text: '',
+            error: ''
         };
     }
 
@@ -44,17 +46,28 @@ export default class Post extends React.Component {
             })
             .end((err, res) => {
                 this.setState({loading: false});
-                if (!err) {
+                if (res.ok && res.body.success) {
                     this.setState({text: ''});
                 } else if (err.status === 403) {
-                    browserHistory.push('login');
+                    this.props.router.push('login');
+                } else {
+                    this.error(res.body.results);
                 }
             });
+    }
+
+    error(message) {
+        this.setState({error: message});
+        setTimeout(() => {
+            this.setState({error: ''})
+        }, 5000);
     }
 
     render() {
         return (
             <div className='form'>
+                {this.state.error !== '' ? <Error>{this.state.error}</Error> : null}
+
                 <textarea disabled={this.state.loading}
                           maxLength={this.state.maxLength}
                           value={this.state.text}
@@ -68,3 +81,5 @@ export default class Post extends React.Component {
         );
     }
 }
+
+export default withRouter(Post);

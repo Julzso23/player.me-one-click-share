@@ -1,16 +1,19 @@
 import React from 'react';
 import request from 'superagent';
 import Spinner from './Spinner';
+import Error from './Error';
+import {withRouter} from 'react-router';
 import '../styles/form.css';
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             name: '',
             password: '',
-            loading: false
+            loading: false,
+            error: ''
         };
     }
 
@@ -29,12 +32,29 @@ export default class Login extends React.Component {
             .end((err, res) => {
                 this.setState({loading: false});
                 this.setState({password: ''});
+
+                if (res.ok && res.body.success) {
+                    this.props.router.push('post');
+                }
+
+                if (err || !res.ok || !res.body.success) {
+                    this.error(res.body.results);
+                }
             });
+    }
+
+    error(message) {
+        this.setState({error: message});
+        setTimeout(() => {
+            this.setState({error: ''})
+        }, 5000);
     }
 
     render() {
         return (
             <div className='form'>
+                {this.state.error !== '' ? <Error>{this.state.error}</Error> : null}
+
                 <input value={this.state.name} onChange={this.handleChange.bind(this)} disabled={this.state.loading} name='name' type='text' placeholder='Username or email' />
                 <input value={this.state.password} onChange={this.handleChange.bind(this)} disabled={this.state.loading} name='password' type='password' placeholder='Password' />
                 {this.state.loading ? <Spinner /> : null}
@@ -43,3 +63,5 @@ export default class Login extends React.Component {
         );
     }
 }
+
+export default withRouter(Login);
