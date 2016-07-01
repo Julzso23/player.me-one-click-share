@@ -21,7 +21,9 @@ class Login extends React.Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    login() {
+    login(event) {
+        event.preventDefault();
+
         this.setState({loading: true});
         request
             .post('https://player.me/api/v1/auth/login')
@@ -52,14 +54,14 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className='form'>
+            <form className='form' onSubmit={this.login.bind(this)}>
                 {this.state.error !== '' ? <Error>{this.state.error}</Error> : null}
 
                 <input value={this.state.name} onChange={this.handleChange.bind(this)} disabled={this.state.loading} name='name' type='text' placeholder='Username or email' />
                 <input value={this.state.password} onChange={this.handleChange.bind(this)} disabled={this.state.loading} name='password' type='password' placeholder='Password' />
                 {this.state.loading ? <Spinner /> : null}
-                <button onClick={this.login.bind(this)} disabled={this.state.loading}>Login</button>
-            </div>
+                <button type='submit' disabled={this.state.loading}>Login</button>
+            </form>
         );
     }
 }
