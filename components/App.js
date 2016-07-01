@@ -6,9 +6,7 @@ import Spinner from './Spinner';
 import request from 'superagent';
 
 export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-
+    componentDidMount() {
         request
             .get('https://player.me/api/v1/users/default')
             .end((err, res) => {
