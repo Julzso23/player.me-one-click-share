@@ -1,0 +1,60 @@
+.form {
+    padding: 10px;
+    overflow: hidden;
+}
+
+.form > textarea, .form > input {
+    height: 52px;
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+    background: #242832;
+    border: 1px solid #333A46;
+    padding: 7px 44px 7px 10px;
+    color: #919baf;
+}
+.form > textarea:focus, .form > input:focus {
+    outline: none;
+}
+.form > textarea[disabled], .form > input[disabled] {
+    opacity: 0.5;
+}
+
+.form > input {
+    height: auto;
+}
+
+.form > .spinner {
+    float: left;
+}
+
+.form > button {
+    margin-top: 10px;
+    background: #60869F;
+    border: 1px solid #60869F;
+    border-radius: 4px;
+    color: #FFF;
+    font-size: 14px;
+    line-height: 1.42857;
+    padding: 5px 12px;
+    float: right;
+    cursor: pointer;
+}
+.form > button:hover {
+    background: #448BBA;
+    border-color: #448BBA;
+}
+.form > button:active {
+    color: #d7e1e7;
+    background: #1F5578;
+    border-color: #1F5578;
+}
+.form > button:focus {
+    outline: none;
+}
+.form > button[disabled] {
+    background: #60869F;
+    border-color: #60869F;
+    opacity: 0.5;
+    cursor: not-allowed;
+}

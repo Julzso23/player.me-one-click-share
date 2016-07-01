@@ -2,24 +2,22 @@
 	"manifest_version": 2,
 
 	"name": "One-click player.me sharing",
-	"description": "Used for posting to player.me.",
-	"version": "2.1.0",
+	"description": "Allows you to share a link to the current page to player.me",
+	"version": "3.0.0",
 
 	"permissions": [
 		"https://player.me/*",
 		"tabs",
-		"cookies",
-		"contextMenus",
-		"notifications"
+		"cookies"
 	],
 
 	"icons": {
-		"16": "icon.png",
-		"128": "icon.png"
+		"16": "logo-icon-16.png",
+		"128": "logo-icon-128.png"
 	},
 
 	"browser_action": {
-		"default_icon": "icon.png",
+		"default_icon": "logo-icon-128.png",
 		"default_title": "Share on player.me",
 		"default_popup": "popup.html"
 	}
