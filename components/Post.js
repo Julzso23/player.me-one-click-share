@@ -12,6 +12,7 @@ class Post extends React.Component {
         this.state = {
             maxLength: 0,
             loading: false,
+            rePost: false,
             url: '',
             title: '',
             text: '',
@@ -22,12 +23,29 @@ class Post extends React.Component {
     componentDidMount() {
         this.setState({loading: true});
         chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-            this.setState({
-                loading: false,
-                maxLength: 4000 - tabs[0].url.length - 12,
-                url: tabs[0].url,
-                title: tabs[0].title
-            });
+            request
+                .get('https://player.me/api/v1/users/default/activities')
+                .end((err, res) => {
+                    if (res.ok && res.body.success) {
+                        res.body.results.forEach(post => {
+                            if (post.data.post_raw.indexOf(tabs[0].url) > -1) {
+                                this.setState({
+                                    loading: false,
+                                    rePost: true
+                                });
+                            }
+                        });
+
+                        if (!this.state.rePost) {
+                            this.setState({
+                                loading: false,
+                                maxLength: 4000 - tabs[0].url.length - 12,
+                                url: tabs[0].url,
+                                title: tabs[0].title
+                            });
+                        }
+                    }
+                });
         });
     }
 
@@ -39,6 +57,7 @@ class Post extends React.Component {
         let value = `[${this.state.title}](${this.state.url})`;
         if (this.state.text !== '') value = this.state.text + ` [&nbsp;](${this.state.url})`;
         this.setState({loading: true});
+
         request
             .post('https://player.me/api/v1/feed')
             .send({
@@ -68,7 +87,9 @@ class Post extends React.Component {
             <div className='form'>
                 {this.state.error !== '' ? <Error>{this.state.error}</Error> : null}
 
-                <textarea disabled={this.state.loading}
+                {this.state.rePost ? <Error>You've already shared this page!</Error> : null}
+
+                <textarea disabled={this.state.loading || this.state.rePost}
                           maxLength={this.state.maxLength}
                           value={this.state.text}
                           onChange={this.handleChange.bind(this)}
@@ -76,7 +97,7 @@ class Post extends React.Component {
                 </textarea>
 
                 {this.state.loading ? <Spinner /> : null}
-                <button disabled={this.state.loading} onClick={this.post.bind(this)}>Share this page</button>
+                <button disabled={this.state.loading || this.state.rePost} onClick={this.post.bind(this)}>Share this page</button>
             </div>
         );
     }
