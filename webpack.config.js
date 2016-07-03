@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('webpack-html-plugin');
+
 module.exports = {
     entry: {
         app: __dirname + '/src/init.js'
@@ -18,5 +20,12 @@ module.exports = {
             loader: 'style-loader!css-loader'
         }]
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            'filename': 'popup.html',
+            'template': __dirname + '/src/popup.html',
+            'inject': false
+        })
+    ],
     devtool: 'source-map'
 };
