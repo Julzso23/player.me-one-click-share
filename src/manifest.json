@@ -3,7 +3,7 @@
 
 	"name": "One-click player.me sharing",
 	"description": "Allows you to share a link to the current page to player.me",
-	"version": "3.1.0",
+	"version": "3.2.0",
 
 	"permissions": [
 		"https://player.me/*",

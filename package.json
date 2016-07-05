@@ -1,6 +1,6 @@
 {
   "name": "player.me-one-click-share",
-  "version": "3.0.1",
+  "version": "3.2.0",
   "description": "Allows you to share a link to the current page to player.me",
   "main": "index.js",
   "scripts": {
