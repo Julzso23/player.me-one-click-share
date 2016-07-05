@@ -28,6 +28,7 @@
     "react-router": "^2.5.1",
     "style-loader": "^0.13.1",
     "superagent": "^2.0.0",
+    "throttle-debounce": "^1.0.1",
     "webpack": "^1.13.1",
     "webpack-html-plugin": "^0.1.1"
   }
