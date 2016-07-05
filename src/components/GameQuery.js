@@ -26,18 +26,19 @@ export default class GameQuery extends React.Component {
     }
 
     query(event) {
-        this.setState({loading: true});
-        console.log('Query');
-
-        request
-            .get('https://player.me/api/v1/games')
-            .query({_query: this.state.query})
-            .end((err, res) => {
-                this.setState({
-                    games: res.body.results,
-                    loading: false
+        if (this.state.query !== '') {
+            this.setState({loading: true});
+            
+            request
+                .get('https://player.me/api/v1/games')
+                .query({_query: this.state.query})
+                .end((err, res) => {
+                    this.setState({
+                        games: res.body.results,
+                        loading: false
+                    });
                 });
-            });
+        }
     }
 
     render() {
@@ -53,7 +54,7 @@ export default class GameQuery extends React.Component {
                     {this.state.loading ? <Spinner /> : null}
                 </form>
 
-                {games.length > 0 ? <ul className='games'>{games}</ul> : this.state.query !== '' ? <div className='games empty'>No games found.</div> : null}
+                {this.state.query !== '' ? (games.length > 0 ? <ul className='games'>{games}</ul> : <div className='games empty'>No games found.</div>) : null}
             </div>
         );
     }
