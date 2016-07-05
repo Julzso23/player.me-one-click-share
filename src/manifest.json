@@ -1,24 +1,24 @@
 {
-	"manifest_version": 2,
+    "manifest_version": 2,
 
-	"name": "One-click player.me sharing",
-	"description": "Allows you to share a link to the current page to player.me",
-	"version": "3.2.0",
+    "name": "One-click player.me sharing",
+    "description": "Allows you to share a link to the current page to player.me",
+    "version": "3.2.0",
 
-	"permissions": [
-		"https://player.me/*",
-		"tabs",
-		"cookies"
-	],
+    "permissions": [
+        "https://player.me/*",
+        "tabs",
+        "cookies"
+    ],
 
-	"icons": {
-		"16": "logo-icon-16.png",
-		"128": "logo-icon-128.png"
-	},
+    "icons": {
+        "16": "logo-icon-16.png",
+        "128": "logo-icon-128.png"
+    },
 
-	"browser_action": {
-		"default_icon": "logo-icon-128.png",
-		"default_title": "Share on player.me",
-		"default_popup": "popup.html"
-	}
+    "browser_action": {
+        "default_icon": "logo-icon-128.png",
+        "default_title": "Share on player.me",
+        "default_popup": "popup.html"
+    }
 }
