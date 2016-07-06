@@ -31,8 +31,7 @@
 .form > button {
     margin-top: 10px;
     background: #60869F;
-    border: 1px solid #60869F;
-    border-radius: 4px;
+    border: 1px solid #50768F;
     color: #FFF;
     font-size: 14px;
     line-height: 1.42857;
@@ -42,12 +41,12 @@
 }
 .form > button:hover {
     background: #448BBA;
-    border-color: #448BBA;
+    border-color: #347BAA;
 }
 .form > button:active {
     color: #d7e1e7;
     background: #1F5578;
-    border-color: #1F5578;
+    border-color: #0F4568;
 }
 .form > button:focus {
     outline: none;
