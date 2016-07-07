@@ -7,17 +7,24 @@ export default class GameList extends React.Component {
 
         this.state = {games: []};
     }
-    componentDidMount() {
+
+    componentWillReceiveProps(nextProps) {
         let games = [];
-        this.props.games.forEach(game => {
+        nextProps.games.forEach(game => {
             games.push(<li key={game.id}>{game.title}</li>);
         });
         this.setState({games: games});
     }
 
     render() {
-        return (
-            {this.props.games.length > 0 ? <ul className='games'>{this.state.games}</ul> : <div className='games empty'>No games found.</div>}
-        );
+        if (this.props.games.length > 0) {
+            return (
+                <ul className='games'>{this.state.games}</ul>
+            );
+        } else {
+            return (
+                <div className='games empty'>No games found.</div>
+            );
+        }
     }
 }
