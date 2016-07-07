@@ -52,7 +52,7 @@ export default class GameQuery extends React.Component {
                     {this.state.loading ? <Spinner /> : null}
                 </form>
 
-                {this.state.query !== '' ? (this.state.games.length > 0 ? <GameList games={this.state.games} /> : <div className='games empty'>No games found.</div>) : null}
+                {this.state.query !== '' ? <GameList games={this.state.games} /> : null}
             </div>
         );
     }

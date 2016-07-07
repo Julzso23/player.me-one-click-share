@@ -17,7 +17,7 @@ export default class GameList extends React.Component {
 
     render() {
         return (
-            <ul className='games'>{this.state.games}</ul>
+            {this.props.games.length > 0 ? <ul className='games'>{this.state.games}</ul> : <div className='games empty'>No games found.</div>}
         );
     }
 }
