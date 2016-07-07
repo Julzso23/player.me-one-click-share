@@ -27,8 +27,8 @@ export default class App extends React.Component {
                     <Route path='post' component={Post}></Route>
                     <Route path='login' component={Login}></Route>
                     <Route path='check-in' component={GameQuery}></Route>
-                    <Route path='*' component={Spinner}></Route>
                 </Route>
+                <Route path='*' component={Spinner}></Route>
             </Router>
         );
     }
