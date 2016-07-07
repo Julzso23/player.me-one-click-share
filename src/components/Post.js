@@ -93,7 +93,7 @@ class Post extends React.Component {
                           maxLength={this.state.maxLength}
                           value={this.state.text}
                           onChange={this.handleChange.bind(this)}
-                          placeholder='Say something about this page'>
+                          placeholder='Say something about this page (Optional)'>
                 </textarea>
 
                 {this.state.loading ? <Spinner /> : null}
