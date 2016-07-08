@@ -3,7 +3,7 @@ import {Router, Route, browserHistory} from 'react-router';
 import Post from './Post';
 import Login from './Login';
 import Layout from './Layout';
-import GameQuery from './GameQuery';
+import GameCheckIn from './GameCheckIn';
 import Spinner from './Spinner';
 import request from 'superagent';
 
@@ -26,7 +26,7 @@ export default class App extends React.Component {
                 <Route path='/' component={Layout}>
                     <Route path='post' component={Post}></Route>
                     <Route path='login' component={Login}></Route>
-                    <Route path='check-in' component={GameQuery}></Route>
+                    <Route path='check-in' component={GameCheckIn}></Route>
                 </Route>
                 <Route path='*' component={Spinner}></Route>
             </Router>

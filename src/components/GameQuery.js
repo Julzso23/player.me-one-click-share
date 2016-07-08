@@ -11,7 +11,6 @@ export default class GameQuery extends React.Component {
 
         this.state = {
             query: '',
-            games: [],
             loading: false
         };
 
@@ -22,7 +21,7 @@ export default class GameQuery extends React.Component {
         event.persist();
         this.setState({query: event.target.value});
         if (this.state.query === '') {
-            this.setState({games: []});
+            this.props.setGames([]);
         }
 
         this.query();
@@ -36,24 +35,18 @@ export default class GameQuery extends React.Component {
                 .get('https://player.me/api/v1/games')
                 .query({_query: this.state.query})
                 .end((err, res) => {
-                    this.setState({
-                        games: res.body.results,
-                        loading: false
-                    });
+                    this.setState({loading: false});
+                    this.props.setGames(res.body.results);
                 });
         }
     }
 
     render() {
         return (
-            <div>
-                <form className='form' onSubmit={event => event.preventDefault()}>
-                    <input value={this.state.query} onChange={this.handleChange.bind(this)} type='text' placeholder='Game name' />
-                    {this.state.loading ? <Spinner /> : null}
-                </form>
-
-                {this.state.query !== '' ? <GameList games={this.state.games} /> : null}
-            </div>
+            <form className='form' onSubmit={event => event.preventDefault()}>
+                <input value={this.state.query} onChange={this.handleChange.bind(this)} type='text' placeholder='Game name' />
+                {this.state.loading ? <Spinner /> : null}
+            </form>
         );
     }
 }
