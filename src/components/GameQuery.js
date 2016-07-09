@@ -20,7 +20,7 @@ export default class GameQuery extends React.Component {
     handleChange(event) {
         event.persist();
         this.setState({query: event.target.value});
-        if (this.state.query === '') {
+        if (event.target.value === '') {
             this.props.setGames([]);
         }
 
@@ -43,10 +43,10 @@ export default class GameQuery extends React.Component {
 
     render() {
         return (
-            <form className='form' onSubmit={event => event.preventDefault()}>
+            <div className='form'>
                 <input value={this.state.query} onChange={this.handleChange.bind(this)} type='text' placeholder='Game name' />
                 {this.state.loading ? <Spinner /> : null}
-            </form>
+            </div>
         );
     }
 }
