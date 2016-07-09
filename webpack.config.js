@@ -26,6 +26,22 @@ module.exports = {
                 query: {
                     name: '[name].[ext]'
                 }
+            },
+            {
+                test   : /\.woff/,
+                loader : 'url?prefix=font/&limit=10000&mimetype=application/font-woff'
+            },
+            {
+                test   : /\.ttf/,
+                loader : 'file?prefix=font/'
+            },
+            {
+                test   : /\.eot/,
+                loader : 'file?prefix=font/'
+            },
+            {
+                test   : /\.svg/,
+                loader : 'file?prefix=font/'
             }
         ]
     },
