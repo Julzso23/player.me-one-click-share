@@ -21,6 +21,8 @@ class Post extends React.Component {
     }
 
     componentDidMount() {
+        chrome.storage.sync.set({lastPage: 'post'}, () => {});
+
         this.setState({loading: true});
         chrome.tabs.query({active: true, currentWindow: true}, tabs => {
             request

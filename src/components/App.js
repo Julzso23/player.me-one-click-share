@@ -15,7 +15,13 @@ export default class App extends React.Component {
                 if (err || !res.ok || !res.body.success) {
                     browserHistory.push('login');
                 } else {
-                    browserHistory.push('post');
+                    chrome.storage.sync.get('lastPage', (items) => {
+                        if (items.lastPage && ['post', 'check-in'].indexOf(items.lastPage) > -1) {
+                            browserHistory.push(items.lastPage);
+                        } else {
+                            browserHistory.push('post');
+                        }
+                    });
                 }
             });
     }
@@ -25,9 +31,9 @@ export default class App extends React.Component {
             <Router history={browserHistory}>
                 <Route path='/' component={Layout}>
                     <Route path='post' component={Post}></Route>
-                    <Route path='login' component={Login}></Route>
                     <Route path='check-in' component={GameCheckIn}></Route>
                 </Route>
+                <Route path='login' component={Login}></Route>
                 <Route path='*' component={Spinner}></Route>
             </Router>
         );

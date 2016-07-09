@@ -13,6 +13,10 @@ export default class GameCheckIn extends React.Component {
         };
     }
 
+    componentDidMount() {
+        chrome.storage.sync.set({ lastPage: 'check-in' }, function () {});
+    }
+
     render() {
         if (this.state.selection) {
             return (
