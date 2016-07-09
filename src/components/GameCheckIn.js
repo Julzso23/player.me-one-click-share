@@ -1,4 +1,5 @@
 import React from 'react';
+import GameSelection from './GameSelection';
 import GameQuery from './GameQuery';
 import GameList from './GameList';
 
@@ -7,16 +8,23 @@ export default class GameCheckIn extends React.Component {
         super(props);
 
         this.state = {
-            games: []
+            games: [],
+            selection: null
         };
     }
 
     render() {
-        return (
-            <div>
-                <GameQuery setGames={games => this.setState({games: games})} />
-                <GameList games={this.state.games} onSelect={game => console.log(game)} />
-            </div>
-        );
+        if (this.state.selection) {
+            return (
+                <GameSelection game={this.state.selection} onComplete={() => this.setState({selection: null})} />
+            );
+        } else {
+            return (
+                <div>
+                    <GameQuery setGames={games => this.setState({games: games})} />
+                    <GameList games={this.state.games} onSelect={game => this.setState({selection: game})} />
+                </div>
+            );
+        }
     }
 }
