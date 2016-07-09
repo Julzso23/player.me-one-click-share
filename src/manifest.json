@@ -13,12 +13,12 @@
     ],
 
     "icons": {
-        "16": "logo-icon-16.png",
-        "128": "logo-icon-128.png"
+        "16": "images/logo-icon-16.png",
+        "128": "images/logo-icon-128.png"
     },
 
     "browser_action": {
-        "default_icon": "logo-icon-128.png",
+        "default_icon": "images/logo-icon-128.png",
         "default_title": "Share on player.me",
         "default_popup": "popup.html"
     }
